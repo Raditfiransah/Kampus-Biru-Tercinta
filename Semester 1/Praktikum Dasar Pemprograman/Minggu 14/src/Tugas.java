@@ -3,4 +3,7 @@ public class Tugas {
 
     }
 
+    static int menu() {
+        return 0;
+    }
 }
