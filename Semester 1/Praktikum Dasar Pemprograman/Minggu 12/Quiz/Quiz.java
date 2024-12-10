@@ -88,7 +88,7 @@ public class Quiz {
         System.out.println();
  
 
-        System.out.println("Wilayah dengan total konsumsi tertinggi selama satu minggu adalah " + wilayah[index]);
+        System.out.println("Wilayah dengan total konsumsi tertinggi selama satu minggu adalah " + wilayah[index1]);
         input.close();
 
     }
