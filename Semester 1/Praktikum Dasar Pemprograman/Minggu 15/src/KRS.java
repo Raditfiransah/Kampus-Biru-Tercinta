@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class KRS {
@@ -5,6 +6,8 @@ public class KRS {
         static String[][] data = new String[100][4];
         static int[] sks = new int[100];
         static int index = 0;
+        static int[] jumSKS= new int[100];
+        static int totalSKS = 0;
 
     public static void main(String[] args) {
         pemantauan();
@@ -24,10 +27,10 @@ public class KRS {
 
         switch (pilihan) {
             case 1:
-                tambahData(daftar, data);
+                tambahData();
                 break;
             case 2:
-                tampilakanDaftar(daftar, data);
+                tampilakanDaftar();
                 break;
             case 3:
                 break;
@@ -35,11 +38,12 @@ public class KRS {
                 System.out.println("Terimakasih");
                 break;
             default:
-                System.out.println("Pilih 1 - 4 ");
+                System.out.println("Pilihlah 1 - 4 ");
+                pemantauan();
         }
     }
 
-    static void tambahData(String[] daftar, String[][] data) {
+    static void tambahData() {
         Scanner input = new Scanner(System.in);
         Scanner input2 = new Scanner(System.in);
         String tambahData = "";
@@ -55,11 +59,13 @@ public class KRS {
                 data[index][3] = input.nextLine();
 
             do {
-                System.out.println("sks");
+                System.out.print("Jumlah SKS (1-3): ");
                 sks[index] = input2.nextInt();
 
                 if (sks[index] < 1 || sks[index] > 3) {
                     System.out.println("Masukkan SKS (1 - 3). Masukkan kembali.");
+                } else {
+
                 }
             } while (sks[index] < 1 || sks[index] > 3);
 
@@ -71,18 +77,25 @@ public class KRS {
         pemantauan();
     }
 
-    static void tampilakanDaftar(String[] daftar, String[][] data){
+    static void tampilakanDaftar(){
         Scanner input = new Scanner(System.in);
-        String cari = " ";
+        String cari = "";
+
         System.out.println("Masukkan NIM Mahasiswa: ");
         cari = input.nextLine();
 
+        System.out.println("=================== Daftar KRS Mahasiswa ===================");
+        System.out.printf("%-15s %-10s %-10s %-25s %-5s%n", daftar[1], daftar[0], daftar[2], daftar[3], daftar[4]);
+
             for (int i = 0; i < index; i++) {
                 if (data[i][1].equalsIgnoreCase(cari)){
-                    System.out.print(data[i][0] + data[i][1] + data[i][2] + data[i][3] + sks[i]);
-                    System.out.println();
+                    System.out.printf("%-15s %-10s %-10s %-25s %-5s%n", data[i][0], data[i][1], data[i][2], data[i][3], sks[i]);
+
                 }
             }
+
+            System.out.println("Total SKS: " + jumSKS[index-1]);
+            System.out.println();
 
         pemantauan();
     }
