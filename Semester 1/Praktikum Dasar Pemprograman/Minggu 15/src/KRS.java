@@ -86,4 +86,19 @@ public class KRS {
 
         pemantauan();
     }
+
+    static void analisisData() {
+        int jmlSksKurang = 0;
+
+        for (int i = 0; i < index; i++) {
+            if (sks[i] < 20) {
+                jmlSksKurang++;
+            }
+        }
+
+        System.out.println("\n--- Analisis Data KRS ---");
+        System.out.println("Jumlah mahasiswa yang mengambil SKS kurang dari 20 adalah " + jmlSksKurang);
+        System.out.println();
+        pemantauan();
+    }
 }
