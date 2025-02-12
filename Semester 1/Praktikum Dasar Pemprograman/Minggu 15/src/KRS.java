@@ -2,12 +2,12 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class KRS {
-        static String[] daftar = {"NIM", "Nama", "Kode MK", "Nama Mata Kuliah", "SKS"};
-        static String[][] data = new String[100][4];
-        static int[] sks = new int[100];
-        static int index = 0;
-        static int[] jumSKS= new int[100];
-        static int totalSKS = 0;
+    static String[] daftar = {"NIM", "Nama", "Kode MK", "Nama Mata Kuliah", "SKS"};
+    static String[][] data = new String[100][4];
+    static int[] sks = new int[100];
+    static int index = 0;
+    static int totalSKS = 0;
+    static int[] skstotal = new int [100];
 
     public static void main(String[] args) {
         pemantauan();
@@ -33,6 +33,7 @@ public class KRS {
                 tampilakanDaftar();
                 break;
             case 3:
+                analisisData();
                 break;
             case 4:
                 System.out.println("Terimakasih");
@@ -49,14 +50,14 @@ public class KRS {
         String tambahData = "";
 
         do {
-                System.out.println("Masukkan Nama Mahasiswa: ");
-                data[index][0] = input.nextLine();
-                System.out.println("NIM");
-                data[index][1] = input.nextLine();
-                System.out.println("Kode Mata Kuliah");
-                data[index][2] = input.nextLine();
-                System.out.println("Nama Mata Kuliah");
-                data[index][3] = input.nextLine();
+            System.out.println("Masukkan Nama Mahasiswa: ");
+            data[index][0] = input.nextLine();
+            System.out.println("NIM");
+            data[index][1] = input.nextLine();
+            System.out.println("Kode Mata Kuliah");
+            data[index][2] = input.nextLine();
+            System.out.println("Nama Mata Kuliah");
+            data[index][3] = input.nextLine();
 
             do {
                 System.out.print("Jumlah SKS (1-3): ");
@@ -64,14 +65,13 @@ public class KRS {
 
                 if (sks[index] < 1 || sks[index] > 3) {
                     System.out.println("Masukkan SKS (1 - 3). Masukkan kembali.");
-                } else {
-
                 }
             } while (sks[index] < 1 || sks[index] > 3);
 
-                index++;
-                System.out.println("Apakah ingin menambah data");
-                tambahData = input.nextLine();
+            index++;
+
+            System.out.println("Apakah ingin menambah data");
+            tambahData = input.nextLine();
 
         } while (tambahData.equalsIgnoreCase("iya"));
         pemantauan();
@@ -87,16 +87,40 @@ public class KRS {
         System.out.println("=================== Daftar KRS Mahasiswa ===================");
         System.out.printf("%-15s %-10s %-10s %-25s %-5s%n", daftar[1], daftar[0], daftar[2], daftar[3], daftar[4]);
 
-            for (int i = 0; i < index; i++) {
-                if (data[i][1].equalsIgnoreCase(cari)){
-                    System.out.printf("%-15s %-10s %-10s %-25s %-5s%n", data[i][0], data[i][1], data[i][2], data[i][3], sks[i]);
-
-                }
+        boolean found = false;
+        for (int i = 0; i < index; i++) {
+            if (data[i][1].equalsIgnoreCase(cari)){
+                System.out.printf("%-15s %-10s %-10s %-25s %-5s%n", data[i][0], data[i][1], data[i][2], data[i][3], sks[i]);
+                totalSKS += sks[i];
+                found = true;
             }
+        }
 
-            System.out.println("Total SKS: " + jumSKS[index-1]);
-            System.out.println();
+        if (found){
+            skstotal[index] = totalSKS;
+            System.out.println("Total SKS: " + skstotal[index]);
+        }else {
+            System.out.println("Data KRS Tidak ditemukan");
+        }
+
+        System.out.println();
 
         pemantauan();
     }
+
+
+    static void analisisData() {
+        int jmlSksKurang = 0;
+
+        for (int i = 0; i < index; i++) {
+            if (sks[i] < 20) {
+                jmlSksKurang++;
+            }
+        }
+        System.out.println("=================== Analisis Data KRS ===================");
+        System.out.println("Jumlah mahasiswa yang mengambil SKS kurang dari 20 adalah " + jmlSksKurang);
+        System.out.println();
+        pemantauan();
+    }
 }
+
