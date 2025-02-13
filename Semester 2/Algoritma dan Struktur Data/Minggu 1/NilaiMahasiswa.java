@@ -2,17 +2,17 @@ import java.util.Scanner;
 
 public class NilaiMahasiswa {
 
-    // Fungsi untuk menghitung rata-rata nilai
-    public static double hitungRataNilai(double[] nilai, int jumlahMatkul) {
+    // Fungsi hitung rata-rata
+    public static double hitungRata(double[] nilai, int jumMatkul) {
         double total = 0;
-        for (int i = 0; i < jumlahMatkul; i++) {
+        for (int i = 0; i < jumMatkul; i++) {
             total += nilai[i];
         }
-        return total / jumlahMatkul;
+        return total / jumMatkul;
     }
 
-    // Fungsi untuk menentukan status kelulusan
-    public static String tentukanKelulusan(double rata) {
+    // Fungsi kelulusan
+    public static String Kelulusan(double rata) {
         if (rata >= 75) {
             return "Lulus";
         } else {
@@ -23,31 +23,28 @@ public class NilaiMahasiswa {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Masukkan jumlah mahasiswa: ");
-        int jumlahMahasiswa = scanner.nextInt();
+        int jumMaha = scanner.nextInt();
         System.out.print("Masukkan jumlah mata kuliah: ");
-        int jumlahMatkul = scanner.nextInt();
+        int jumMatkul = scanner.nextInt();
 
-        // Proses input dan perhitungan untuk setiap mahasiswa
-        for (int i = 0; i < jumlahMahasiswa; i++) {
+        // input mahasiswa
+        for (int i = 0; i < jumMaha; i++) {
             System.out.println("Masukkan nilai untuk Mahasiswa ke-" + (i + 1) + ":");
-            double[] nilai = new double[jumlahMatkul];
+            double[] nilai = new double[jumMatkul];
 
-            // Input nilai untuk setiap mata kuliah
-            for (int j = 0; j < jumlahMatkul; j++) {
-                System.out.print("Nilai Mata Kuliah ke-" + (j + 1) + ": ");
+            // Input nilai mata kuliah
+            for (int j = 0; j < jumMatkul; j++) {
+                System.out.print("NilaiMata Kuliah ke-" + (j + 1) + ": ");
                 nilai[j] = scanner.nextDouble();
             }
 
-            // Hitung rata-rata nilai
-            double rata = hitungRataNilai(nilai, jumlahMatkul);
-            // Tentukan status kelulusan
-            String status = tentukanKelulusan(rata);
+            // Hitung rata-rata nilai dan kelulusan
+            double rata = hitungRata(nilai, jumMatkul);
+            String hasilKelulusan = Kelulusan(rata);
 
             // Tampilkan hasil
-            System.out.println("Mahasiswa ke-" + (i + 1) + " memiliki rata-rata nilai = " + rata + " dan dinyatakan: " + status);
-            System.out.println("---------------------------------------");
+            System.out.println("Mahasiswa ke-" + (i + 1) + " memiliki rata-rata nilai = " + rata + " dan dinyatakan: " + hasilKelulusan);
+            System.out.println();
         }
-
-        scanner.close();
     }
 }
